@@ -569,10 +569,10 @@ function applyMove(move, options = {}) {
   logMove(move, piece, captured);
   playMoveSounds(resultType);
 
-  renderBoard();   // always render the final board first
+  renderBoard();
 
-  const ended = checkGameEnd();   // THEN check for mate
-  if (ended) return;              // overlay shows at correct moment
+  const ended = checkGameEnd();
+  if (ended) return;
 
   sendFenToEngine();
   requestAiMoveIfNeeded();
