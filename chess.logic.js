@@ -230,27 +230,52 @@ function generatePseudoMovesForSquare(x, y) {
       }
     });
 
+    /* === FIXED CASTLING (Hard mode now works) === */
+
+    // WHITE KING
     if (isWhite && y === 7 && x === 4) {
+
+      // King-side (e1 → g1)
       if (castlingRights.WK &&
           !board[7][5] && !board[7][6] &&
-          board[7][7] === "R") {
+          board[7][7] === "R" &&
+          !squareAttacked(4,7,false) &&
+          !squareAttacked(5,7,false) &&
+          !squareAttacked(6,7,false)) {
         addMove(x, y, 6, 7, "castle");
       }
+
+      // Queen-side (e1 → c1)
       if (castlingRights.WQ &&
           !board[7][3] && !board[7][2] && !board[7][1] &&
-          board[7][0] === "R") {
+          board[7][0] === "R" &&
+          !squareAttacked(4,7,false) &&
+          !squareAttacked(3,7,false) &&
+          !squareAttacked(2,7,false)) {
         addMove(x, y, 2, 7, "castle");
       }
     }
+
+    // BLACK KING
     if (!isWhite && y === 0 && x === 4) {
+
+      // King-side (e8 → g8)
       if (castlingRights.BK &&
           !board[0][5] && !board[0][6] &&
-          board[0][7] === "r") {
+          board[0][7] === "r" &&
+          !squareAttacked(4,0,true) &&
+          !squareAttacked(5,0,true) &&
+          !squareAttacked(6,0,true)) {
         addMove(x, y, 6, 0, "castle");
       }
+
+      // Queen-side (e8 → c8)
       if (castlingRights.BQ &&
           !board[0][3] && !board[0][2] && !board[0][1] &&
-          board[0][0] === "r") {
+          board[0][0] === "r" &&
+          !squareAttacked(4,0,true) &&
+          !squareAttacked(3,0,true) &&
+          !squareAttacked(2,0,true)) {
         addMove(x, y, 2, 0, "castle");
       }
     }
