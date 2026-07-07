@@ -113,9 +113,13 @@ async function loadThemeList() {
       list.forEach(name => {
         const opt = document.createElement("option");
         opt.value = name;
-        opt.textContent = name;
+
+        const displayName = name.replace(/\.json$/i, "");
+        opt.textContent = displayName;
+
         listbox.appendChild(opt);
       });
+
     } else {
       const opt = document.createElement("option");
       opt.value = "default";
